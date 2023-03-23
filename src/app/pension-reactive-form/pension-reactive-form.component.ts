@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PensionPlanCalculator } from '../pension-plan-calculator';
+import { PensionPlanCalcAndorra } from '../pension-plan-calcAndorra';
+
 
 @Component({
   selector: 'app-pension-reactive-form',
@@ -10,6 +12,7 @@ import { PensionPlanCalculator } from '../pension-plan-calculator';
 export class PensionReactiveFormComponent implements OnInit {
   pensionForm: FormGroup;
   totalDeducted: number = 0;
+  useSpainTaxTable: boolean = true;
 
   constructor(private fb: FormBuilder, private calculator: PensionPlanCalculator) { 
     this.pensionForm = this.fb.group({
@@ -31,8 +34,19 @@ export class PensionReactiveFormComponent implements OnInit {
     };
   
     if (data.annualIncome && data.personalContribution && data.companyContribution) {
-      this.totalDeducted = PensionPlanCalculator.refundCalc(data);
+      if (this.useSpainTaxTable) {
+        this.totalDeducted = PensionPlanCalculator.refundCalc(data);
+      } else { 
+        this.totalDeducted = PensionPlanCalcAndorra.refundCalcAndorra(data);
+      }
+
       this.pensionForm.get('totalDeducted')?.setValue(this.totalDeducted);
     }
   }
+
+  changeTaxTable() {
+    this.useSpainTaxTable = !this.useSpainTaxTable;
+    this.onSubmit();
+  }
+
 }

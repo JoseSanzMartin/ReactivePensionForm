@@ -1,19 +1,28 @@
-<form [formGroup]="pensionForm" (ngSubmit)="onSubmit()">
-    <div>
-      <label for="annualIncome">Annual Income</label>
-      <input type="number" id="annualIncome" formControlName="annualIncome" >
-    </div>
-    <div>
-      <label for="personalContribution">Personal Plan Contribution</label>
-      <input type="number" id="personalContribution" formControlName="personalContribution" >
-    </div>
-    <div>
-      <label for="companyContribution">Company Plan Contribution</label>
-      <input type="number" id="companyContribution" formControlName="companyContribution" >
-    </div>
-    <button type="submit" [disabled]="pensionForm.get('personalContribution')?.value > 1500 || pensionForm.get('companyContribution')?.value > 8500">Calculate Refund</button>
-    <div>
-      <label for="totalDeducted">Total Deducted</label>
-      <input type="number" id="totalDeducted" formControlName="totalDeducted">
-    </div>
-  </form>
+<form [formGroup]="pensionForm" (ngSubmit)="onSubmit()" class="container">
+  <h1 class="text-center my-4">Pension Plan Calculator</h1>
+
+  <div class="form-group">
+    <label for="annualIncome">Annual Income</label>
+    <input type="number" id="annualIncome" formControlName="annualIncome" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="personalContribution">Personal Plan Contribution</label>
+    <input type="number" id="personalContribution" formControlName="personalContribution" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="companyContribution">Company Plan Contribution</label>
+    <input type="number" id="companyContribution" formControlName="companyContribution" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="totalDeducted">Total Deducted</label>
+    <input type="number" id="totalDeducted" formControlName="totalDeducted" class="form-control">
+  </div>
+
+  <div class="buttons-container">
+    <button type="submit" class="btn btn-primary" [disabled]="pensionForm.get('personalContribution')?.value > 1500 || pensionForm.get('companyContribution')?.value > 8500">Calculate Refund</button>
+    <button type="button" (click)="changeTaxTable()" class="btn btn-secondary">{{ useSpainTaxTable ? 'Change to Andorra' : 'Change to Spain' }}</button>
+  </div>
+</form>
