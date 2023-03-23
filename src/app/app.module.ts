@@ -3,10 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { PensionReactiveFormComponent } from './pension-reactive-form/pension-reactive-form.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PensionReactiveFormComponent
   ],
   imports: [
     BrowserModule,
