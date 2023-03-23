@@ -1,1 +1,19 @@
-<p>pension-reactive-form works!</p>
+<form [formGroup]="pensionForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="annualIncome">Annual Income</label>
+      <input type="number" id="annualIncome" formControlName="annualIncome" >
+    </div>
+    <div>
+      <label for="personalContribution">Personal Plan Contribution</label>
+      <input type="number" id="personalContribution" formControlName="personalContribution" >
+    </div>
+    <div>
+      <label for="companyContribution">Company Plan Contribution</label>
+      <input type="number" id="companyContribution" formControlName="companyContribution" >
+    </div>
+    <button type="submit" [disabled]="pensionForm.get('personalContribution')?.value > 1500 || pensionForm.get('companyContribution')?.value > 8500">Calculate Refund</button>
+    <div>
+      <label for="totalDeducted">Total Deducted</label>
+      <input type="number" id="totalDeducted" formControlName="totalDeducted">
+    </div>
+  </form>
