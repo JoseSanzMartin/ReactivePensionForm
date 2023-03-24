@@ -16,9 +16,11 @@ export class PensionPlanCalcAndorra {
     
     let rate = 0;
     if (annualIncome <= 24000) {
+      rate = 0;
+    } else if (annualIncome <= 40000) {
       rate = 0.05;
     } else {
-      rate = 0.10;
+      rate = 0.1;
     }
 
     const personalContribution = Math.min(data.personalContribution, PensionPlanCalcAndorra.maxPersonalContribution);
